@@ -1,0 +1,9 @@
+spring:
+  application:
+    name: medicine
+server:
+  port: 8080
+
+fda:
+  api:
+    base-url: "https://api.fda.gov/drug/drugsfda.json"

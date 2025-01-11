@@ -1,0 +1,22 @@
+version: "3.8"
+services:
+  app:
+    build:
+      context: .
+    ports:
+      - "8080:8080"
+      - "5005:5005"
+    depends_on:
+      - mongodb
+    environment:
+      _JAVA_OPTIONS: -agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=*:5005
+      SPRING_DATA_MONGODB_URI: mongodb://root:password@mongodb:27017/medicine?authSource=admin # take from secrets
+      SPRING_DATA_MONGODB_DATABASE: medicine
+  mongodb:
+    image: mongo:5.0
+    container_name: mongodb
+    ports:
+      - "27017:27017"
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root # keep in secrets
+      MONGO_INITDB_ROOT_PASSWORD: password # keep in secrets
